@@ -4,18 +4,20 @@ class Screen
     @max_row, @max_col = `stty size`.scan(/\d+/).map(&:to_i)
     @row_offset = offset(@max_row)
     @col_offset = offset(@max_col)
+    @buf = ''
   end
 
   def print(character:, point:)
     col, row = map(point)
-    $stdout.print "\033[#{row};#{col}H#{character}\033[0;0H"
+    @buf += "\033[#{row};#{col}H#{character}\033[0;0H"
   end
 
   def clear
-    puts "\033[2J"
+    @buf = "\033[2J"
   end
 
   def flush
+    $stdout.print @buf
     $stdout.flush
   end
 
