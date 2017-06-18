@@ -40,6 +40,11 @@ def main
     x, y = [Math.sin(i), Math.cos(i)]
     p = Point.new(x: x, y: y)
     screen.print(character: character, point: p)
+    
+    i += 10
+    x, y = [Math.sin(i), Math.cos(i)]
+    p = Point.new(x: x, y: y)
+    screen.print(character: character, point: p)
 
     screen.flush
     sleep 0.08
